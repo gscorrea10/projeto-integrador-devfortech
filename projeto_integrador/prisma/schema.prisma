@@ -1,0 +1,69 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Users {
+  id         String   @id @unique @default(uuid())
+  full_name  String
+  email      String   @unique
+  password   String
+  cpf        String   @unique
+  cnh        String   @unique
+  is_admin   Boolean
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  Vehicles Vehicles[]
+  Process  Process[]
+
+  @@map("users")
+}
+
+model Vehicles {
+  id            String   @id @unique @default(uuid())
+  id_user       String
+  license_plate String   @unique
+  renavam       String   @unique
+  model         String
+  year          Int
+  brand         String
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+
+  user Users @relation(fields: [id_user], references: [id])
+
+  Process Process[]
+
+  @@map("vehicles")
+}
+
+model Process {
+  id              String   @id @unique @default(uuid())
+  ait             String   @unique
+  infraction_date String
+  description     String?
+  code            String   @unique
+  code_ctb        String
+  infraction_uf   String
+  price           Float
+  id_vehicle      String
+  process_state   String
+  finished        Boolean
+  created_at      DateTime @default(now())
+  updated_at      DateTime @updatedAt
+
+  vehicle Vehicles @relation(fields: [id_vehicle], references: [id])
+
+  Users   Users?  @relation(fields: [usersId], references: [id])
+  usersId String?
+
+  @@map("process")
+}
