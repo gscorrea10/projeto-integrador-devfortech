@@ -30,6 +30,7 @@ model Users {
 model Vehicles {
   id            String   @id @unique @default(uuid())
   id_user       String
+  vehicle_state String
   license_plate String   @unique
   renavam       String   @unique
   model         String
@@ -55,7 +56,7 @@ model Process {
   infraction_uf   String
   price           Float
   id_vehicle      String
-  process_state   String
+  process_status  String
   finished        Boolean
   created_at      DateTime @default(now())
   updated_at      DateTime @updatedAt
