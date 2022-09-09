@@ -1,6 +1,5 @@
 import bcrypt from "bcryptjs";
 import { prisma } from "../app.js";
-import bcrypt from "bcryptjs";
 
 export default class UserService {
   static async create(req, res) {
