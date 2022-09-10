@@ -21,6 +21,7 @@ export default class SessionsService {
         {
           id: user.id,
           email: user.email,
+          is_admin: user.is_admin,
         },
         process.env.JWT_SECRET,
         {
