@@ -1,20 +1,21 @@
 import jwt from "jsonwebtoken";
 import { prisma } from "../app.js";
 import { compare } from "bcryptjs";
+import AppError from "../errors/AppError.js";
 
 export default class SessionsService {
-  static async login(req, res) {
+  static async login(email, password) {
     const user = await prisma.users.findFirst({
       where: {
-        email: req.body.email,
+        email,
       },
     });
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      throw new AppError("Invalid credentials.", 401);
     }
 
-    const passwordMatch = await compare(req.body.password, user.password);
-    const emailMath = req.body.email === user.email;
+    const passwordMatch = await compare(password, user.password);
+    const emailMath = email === user.email;
     if (passwordMatch && emailMath) {
       const token = jwt.sign(
         {
@@ -28,19 +29,18 @@ export default class SessionsService {
       );
       return { token: token };
     }
-    return res.status(401).json({ message: "Invalid credentials" });
+    throw new AppError("Invalid credentials.", 401);
   }
 
-  static verifyToken(req, res) {
-    const { token } = req.body;
+  static verifyToken(token) {
     if (!token) {
-      return res.status(401).json({ message: "Field token is required." });
+      throw new AppError("Field token is required.", 400);
     }
     try {
       jwt.verify(token, process.env.JWT_SECRET);
-      return res.status(200).json({ message: "Valid token." });
+      return { message: "Valid token." };
     } catch (err) {
-      return res.status(401).json({ message: "Invalid token." });
+      throw new AppError("Invalid token.", 400);
     }
   }
 }
