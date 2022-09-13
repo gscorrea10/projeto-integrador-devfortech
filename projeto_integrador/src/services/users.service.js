@@ -4,7 +4,21 @@ import AppError from "../errors/AppError.js";
 
 export default class UserService {
   static async create(full_name, email, password, cpf, cnh, is_admin) {
-    // const { full_name, email, password, cpf, cnh, is_admin } = req.body;
+    // try {
+    //   prisma.vehicles.create({
+    //     data: {
+    //       id_user: "5876d730-0de8-4825-84ed-0e5988607d04",
+    //       vehicle_state: "SP",
+    //       license_plate: "ABC1234",
+    //       renavam: "123456",
+    //       model: "Gol",
+    //       brand: "Volkswagen",
+    //       year: 2010,
+    //     },
+    //   });
+    // } catch (error) {
+    //   throw new AppError(error.message, 500);
+    // }
     const fields = await verifyExistentUser(email, cpf, cnh);
     if (fields.length > 0) {
       throw new AppError(`Fields ${fields.join(", ")} already exists.`, 400);
