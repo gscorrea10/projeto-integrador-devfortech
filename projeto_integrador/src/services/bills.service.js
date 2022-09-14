@@ -4,8 +4,16 @@ import AppError from "../errors/AppError";
 require("dotenv").config();
 
 export default class BillsService {
-  static search_plate = async (plate, id_vehicle) => {
-    const vehicle_info = await getVehicleInfo(plate);
+  static search_plate = async (id_vehicle) => {
+    const vehicle = await prisma.vehicles.findFirst({
+      where: {
+        id: id_vehicle,
+      },
+    });
+    if (!vehicle) {
+      throw new AppError("Vehicle not found.", 404);
+    }
+    const vehicle_info = await getVehicleInfo(vehicle.license_plate);
     try {
       const bills = await prisma.bills.createMany({
         data: [
