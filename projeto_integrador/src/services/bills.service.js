@@ -52,6 +52,9 @@ export default class BillsService {
         where: {
           id_vehicle: id_vehicle,
         },
+        include: {
+          vehicle: true,
+        },
       });
       return bills;
     } catch (error) {

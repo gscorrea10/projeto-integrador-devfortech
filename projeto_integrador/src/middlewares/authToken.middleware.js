@@ -13,6 +13,8 @@ export default class AuthTokenMiddleware {
     }
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      req.userId = decoded.id;
+      req.is_admin = decoded.is_admin;
       return next();
     } catch (err) {
       return res.status(401).json({ message: "Invalid token." });

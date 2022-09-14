@@ -15,6 +15,7 @@ export class ProcessController {
         finished,
         id_vehicle,
       } = req.body;
+      const userId = req.userId;
       const process = await ProcessService.create(
         ait,
         infraction_date,
@@ -26,20 +27,23 @@ export class ProcessController {
         process_status,
         finished,
         id_vehicle,
+        userId,
       );
       return res.status(201).json(process);
     } catch (err) {
-      return res.status(500).json({ message: err.message });
+      return res.status(400).json({ message: err.message });
     }
   };
 
   static getByAit = async (req, res) => {
     try {
+      const userId = req.userId;
+      const is_admin = req.is_admin;
       const ait = req.body.ait;
-      const process = await ProcessService.getByAit(ait);
+      const process = await ProcessService.getByAit(ait, userId, is_admin);
       return res.status(200).json(process);
     } catch (err) {
-      return res.status(500).json({ message: err.message });
+      return res.status(err.status).json({ message: err.message });
     }
   };
 
@@ -73,7 +77,7 @@ export class ProcessController {
       );
       return res.status(200).json(process);
     } catch (err) {
-      return res.status(500).json({ message: err.message });
+      return res.status(err.status).json({ message: err.message });
     }
   };
 
@@ -83,7 +87,7 @@ export class ProcessController {
       await ProcessService.deleteProcess(id);
       return res.status(204).json({});
     } catch (err) {
-      return res.status(500).json({ message: err.message });
+      return res.status(err.status).json({ message: err.message });
     }
   };
 }

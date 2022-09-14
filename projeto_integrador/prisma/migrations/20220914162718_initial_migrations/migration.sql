@@ -41,7 +41,7 @@ CREATE TABLE `process` (
     `id` VARCHAR(191) NOT NULL,
     `ait` VARCHAR(191) NOT NULL,
     `infraction_date` VARCHAR(191) NOT NULL,
-    `description` VARCHAR(191) NULL,
+    `description` VARCHAR(191) NOT NULL,
     `code` VARCHAR(191) NOT NULL,
     `code_ctb` VARCHAR(191) NOT NULL,
     `infraction_uf` VARCHAR(191) NOT NULL,
@@ -74,7 +74,6 @@ CREATE TABLE `bills` (
     `id_vehicle` VARCHAR(191) NOT NULL,
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updated_at` DATETIME(3) NOT NULL,
-    `usersId` VARCHAR(191) NULL,
 
     UNIQUE INDEX `bills_id_key`(`id`),
     PRIMARY KEY (`id`)
