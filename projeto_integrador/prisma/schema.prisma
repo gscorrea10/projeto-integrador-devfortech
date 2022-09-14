@@ -42,7 +42,7 @@ model Vehicles {
   user Users @relation(fields: [id_user], references: [id])
 
   Process Process[]
-  Bills Bills[]
+  Bills   Bills[]
 
   @@map("vehicles")
 }
@@ -51,7 +51,7 @@ model Process {
   id              String   @id @unique @default(uuid())
   ait             String   @unique
   infraction_date String
-  description     String?
+  description     String
   code            String   @unique
   code_ctb        String
   infraction_uf   String
@@ -71,19 +71,19 @@ model Process {
 }
 
 model Bills {
-  id              String   @id @unique @default(uuid())
-  auto            String     
-  data_hora       DateTime
-  price           Float
-  type            String
-  city            String
-  address         String
-  description     String
-  cnh_points      Int
-  severity        String
-  id_vehicle      String
-  created_at      DateTime @default(now())
-  updated_at      DateTime @updatedAt
+  id          String   @id @unique @default(uuid())
+  auto        String
+  data_hora   DateTime
+  price       Float
+  type        String
+  city        String
+  address     String
+  description String
+  cnh_points  Int
+  severity    String
+  id_vehicle  String
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
 
   vehicle Vehicles @relation(fields: [id_vehicle], references: [id])
 
