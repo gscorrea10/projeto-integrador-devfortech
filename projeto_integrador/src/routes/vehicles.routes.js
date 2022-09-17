@@ -1,5 +1,5 @@
 import { Router } from "express";
-import VehiclesController from "../controllers/vehicles.controller.js";
+import VehiclesController from "../../projeto_integrador/src/controllers/vehicles.controller.js";
 
 export const vehiclesRouter = Router();
 

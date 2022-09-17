@@ -1,7 +1,0 @@
-node_modules
-.env
-nodemon.json
-yarn.lock
-.env.example
-package-lock.json
-package.json

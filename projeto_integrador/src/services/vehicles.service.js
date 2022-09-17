@@ -1,5 +1,5 @@
-import { prisma } from "../app.js";
-import AppError from "../errors/AppError.js";
+import { prisma } from "../../../src/app.js";
+import AppError from "../../../src/errors/AppError.js";
 
 export default class VehiclesService {
   static async create(id_user, vehicle_state, license_plate, renavam, model, brand, year ) {
