@@ -87,5 +87,7 @@ model Bills {
 
   vehicle Vehicles @relation(fields: [id_vehicle], references: [id])
 
+  usersId String?
+
   @@map("bills")
 }

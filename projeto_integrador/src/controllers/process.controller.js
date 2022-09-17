@@ -47,6 +47,18 @@ export class ProcessController {
     }
   };
 
+  static getAllProcessFromVehicle = async (req, res) => {
+    try {
+      const userId = req.userId;
+      const is_admin = req.is_admin;
+      const id_vehicle = req.body.id_vehicle;
+      const process = await ProcessService.getAllProcessFromVehicle(id_vehicle, userId, is_admin);
+      return res.status(200).json(process);
+    } catch (err) {
+      return res.status(400).json({ message: err.message });
+    }
+  };
+
   static update = async (req, res) => {
     try {
       const {
