@@ -3,6 +3,7 @@ import { userRouter } from "./user.routes.js";
 import { sessionsRouter } from "./sessions.routes.js";
 import { billsRouter } from "./bills.routes.js";
 import { processRouter } from "./process.routes.js";
+import { processRouter } from "./vehicles.routes.js";
 
 export const routes = Router();
 routes.use("/users", userRouter);
