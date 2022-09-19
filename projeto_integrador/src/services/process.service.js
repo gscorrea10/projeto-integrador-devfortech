@@ -6,7 +6,7 @@ class ProcessService {
     ait,
     infraction_date,
     description,
-    code,
+    number_process,
     code_ctb,
     infraction_uf,
     price,
@@ -15,7 +15,7 @@ class ProcessService {
     id_vehicle,
     userId,
   ) {
-    const existentFields = await verifyUniqueFields(ait, code);
+    const existentFields = await verifyUniqueFields(ait, number_process);
     if (existentFields.length > 0) {
       throw new AppError(`Process with ${existentFields.join(', ')} already exists`, 400);
     }
@@ -24,7 +24,7 @@ class ProcessService {
         ait,
         infraction_date, //new Date(infraction_date).toISOString(),
         description,
-        code,
+        number_process,
         code_ctb,
         infraction_uf,
         price,
@@ -42,6 +42,15 @@ class ProcessService {
     const process = await prisma.process.findUnique({
       where: {
         ait,
+      },
+      include: {
+        vehicle: {
+          select: {
+            license_plate: true,
+            renavam: true,
+            vehicle_state: true,
+          },
+        },
       },
     });
     if (!process) {
@@ -73,7 +82,7 @@ class ProcessService {
     ait,
     infraction_date,
     description,
-    code,
+    number_process,
     code_ctb,
     infraction_uf,
     price,
@@ -93,7 +102,7 @@ class ProcessService {
         ait,
         infraction_date,
         description,
-        code,
+        number_process,
         code_ctb,
         infraction_uf,
         price,
@@ -118,7 +127,7 @@ class ProcessService {
 
 export { ProcessService };
 
-const verifyUniqueFields = async (ait, code) => {
+const verifyUniqueFields = async (ait, number_process) => {
   const fields = [];
   let process = await prisma.process.findFirst({
     where: {
@@ -130,11 +139,11 @@ const verifyUniqueFields = async (ait, code) => {
   }
   process = await prisma.process.findFirst({
     where: {
-      code,
+      number_process,
     },
   });
   if (process) {
-    fields.push('code');
+    fields.push('number_process');
   }
   return fields;
 };

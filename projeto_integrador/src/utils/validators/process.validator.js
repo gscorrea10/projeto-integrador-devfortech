@@ -2,7 +2,7 @@ import { body, validationResult } from 'express-validator';
 
 export const validationBodyCreateProcess = [
   body('ait', 'Ait is required').exists({ checkFalsy: true }),
-  body('code', 'Code is required').exists({ checkFalsy: true }),
+  body('number_process', 'Number Process is required').exists({ checkFalsy: true }),
   body('infraction_uf', 'Only 2 caracters').toUpperCase().isLength({ max: 2 }),
   body('description', 'Too many caracters (50 max)').isLength({ max: 50 }),
   body('price', 'Must be a number').isFloat(),

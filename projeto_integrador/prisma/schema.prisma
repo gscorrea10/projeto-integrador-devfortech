@@ -52,7 +52,7 @@ model Process {
   ait             String   @unique
   infraction_date String
   description     String
-  code            String   @unique
+  number_process  String   @unique
   code_ctb        String
   infraction_uf   String
   price           Float
