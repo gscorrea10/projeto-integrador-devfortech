@@ -15,10 +15,10 @@ class ProcessService {
     id_vehicle,
     userId,
   ) {
-    const existentFields = await verifyUniqueFields(ait, code)
-      if (existentFields.length > 0) {
-        throw new AppError(`Process with ${existentFields.join(', ')} already exists`, 400);
-      }
+    const existentFields = await verifyUniqueFields(ait, code);
+    if (existentFields.length > 0) {
+      throw new AppError(`Process with ${existentFields.join(', ')} already exists`, 400);
+    }
     const process = await prisma.process.create({
       data: {
         ait,
@@ -44,11 +44,11 @@ class ProcessService {
         ait,
       },
     });
-    if(!process){
+    if (!process) {
       throw new AppError('Process not found', 404);
     }
-    if(userId === process.usersId || is_admin) {
-    return process;
+    if (userId === process.usersId || is_admin) {
+      return process;
     }
     throw new AppError('You are not authorized to access this process', 401);
   }
@@ -66,28 +66,28 @@ class ProcessService {
     finished,
     id_vehicle,
   ) {
-      const existentFields = await verifyUniqueFields(ait, code)
-      if (existentFields.length > 0) {
-        throw new AppError(`Process with ${existentFields.join(', ')} already exists`, 400);
-      }
-      const process = await prisma.process.update({
-        where: {
-          id,
-        },
-        data: {
-          ait,
-          infraction_date,
-          description,
-          code,
-          code_ctb,
-          infraction_uf,
-          price,
-          process_status,
-          finished,
-          id_vehicle,
-        },
-      });
-      return process;
+    // const existentFields = await verifyUniqueFields(ait, code);
+    if (existentFields.length > 0) {
+      throw new AppError(`Process with ${existentFields.join(', ')} already exists`, 400);
+    }
+    const process = await prisma.process.update({
+      where: {
+        id,
+      },
+      data: {
+        ait,
+        infraction_date,
+        description,
+        code,
+        code_ctb,
+        infraction_uf,
+        price,
+        process_status,
+        finished,
+        id_vehicle,
+      },
+    });
+    return process;
   }
 
   static async deleteProcess(id) {
