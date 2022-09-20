@@ -48,24 +48,26 @@ model Vehicles {
 }
 
 model Process {
-  id              String   @id @unique @default(uuid())
-  ait             String   @unique
-  infraction_date String
-  description     String
-  number_process  String   @unique
-  code_ctb        String
-  infraction_uf   String
-  price           Float
-  id_vehicle      String
-  process_status  String
-  finished        Boolean
-  created_at      DateTime @default(now())
-  updated_at      DateTime @updatedAt
+  id             String   @id @unique @default(uuid())
+  usersId        String?
+  billsId        String?
+  ait            String   @unique
+  process_date   String
+  description    String
+  number_process String   @unique
+  code_ctb       String
+  infraction_uf  String
+  price          Float
+  id_vehicle     String
+  process_status String
+  finished       Boolean
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt
 
   vehicle Vehicles @relation(fields: [id_vehicle], references: [id])
 
-  Users   Users?  @relation(fields: [usersId], references: [id])
-  usersId String?
+  Users Users? @relation(fields: [usersId], references: [id])
+  bills Bills? @relation(fields: [billsId], references: [id])
 
   @@map("process")
 }
@@ -88,6 +90,7 @@ model Bills {
   vehicle Vehicles @relation(fields: [id_vehicle], references: [id])
 
   usersId String?
+  Process Process[]
 
   @@map("bills")
 }

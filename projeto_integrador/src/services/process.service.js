@@ -4,7 +4,7 @@ import AppError from '../errors/AppError.js';
 class ProcessService {
   static async create(
     ait,
-    infraction_date,
+    process_date,
     description,
     number_process,
     code_ctb,
@@ -22,7 +22,7 @@ class ProcessService {
     const process = await prisma.process.create({
       data: {
         ait,
-        infraction_date, //new Date(infraction_date).toISOString(),
+        process_date, //new Date(process_date).toISOString(),
         description,
         number_process,
         code_ctb,
@@ -38,10 +38,10 @@ class ProcessService {
     return process;
   }
 
-  static async getByAit(ait, userId, is_admin) {
+  static async getByNumberProcess(number_process, userId, is_admin) {
     const process = await prisma.process.findUnique({
       where: {
-        ait,
+        number_process,
       },
       include: {
         vehicle: {
@@ -49,6 +49,13 @@ class ProcessService {
             license_plate: true,
             renavam: true,
             vehicle_state: true,
+            Bills: {
+              select: {
+                description: true,
+                cnh_points: true,
+                severity: true,
+              },
+            },
           },
         },
       },
@@ -80,7 +87,7 @@ class ProcessService {
   static async update(
     id,
     ait,
-    infraction_date,
+    process_date,
     description,
     number_process,
     code_ctb,
@@ -100,7 +107,7 @@ class ProcessService {
       },
       data: {
         ait,
-        infraction_date,
+        process_date,
         description,
         number_process,
         code_ctb,

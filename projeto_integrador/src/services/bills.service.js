@@ -1,11 +1,19 @@
-import { prisma } from "../app";
-import axios from "axios";
-import AppError from "../errors/AppError";
-require("dotenv").config();
+import { prisma } from '../app';
+import axios from 'axios';
+import AppError from '../errors/AppError';
+require('dotenv').config();
 
 export default class BillsService {
-  static search_plate = async (plate, id_vehicle) => {
-    const vehicle_info = await getVehicleInfo(plate);
+  static search_plate = async (id_vehicle) => {
+    const vehicle = await prisma.vehicles.findFirst({
+      where: {
+        id: id_vehicle,
+      },
+    });
+    if (!vehicle) {
+      throw new AppError('Vehicle not found.', 404);
+    }
+    const vehicle_info = await getVehicleInfo(vehicle.license_plate);
     try {
       const bills = await prisma.bills.createMany({
         data: [
@@ -13,9 +21,7 @@ export default class BillsService {
             return {
               id_vehicle: id_vehicle,
               auto: multa.auto,
-              data_hora: new Date(
-                normalizeDateFormat(multa.normalizado_datahora)
-              ),
+              data_hora: new Date(normalizeDateFormat(multa.normalizado_datahora)),
               price: multa.normalizado_valor,
               type: multa.tipo_infracao,
               city: multa.municipio,
@@ -46,7 +52,7 @@ export default class BillsService {
         },
       });
       if (!vehicle) {
-        throw new AppError("Vehicle not found.", 404);
+        throw new AppError('Vehicle not found.', 404);
       }
       const bills = await prisma.bills.findMany({
         where: {
@@ -67,11 +73,11 @@ const getVehicleInfo = async (plate) => {
   try {
     const vehicle_info = await axios
       .get(
-        `https://api.infosimples.com/api/v2/consultas/detran/ms/multas?token=${process.env.API_TOKEN}&timeout=600&placa=${plate}`
+        `https://api.infosimples.com/api/v2/consultas/detran/ms/multas?token=${process.env.API_TOKEN}&timeout=600&placa=${plate}`,
       )
       .then((resp) => resp.data);
     if (vehicle_info.data[0].multas.length === 0) {
-      throw new AppError("No fines found for this vehicle.", 404);
+      throw new AppError('No fines found for this vehicle.', 404);
     }
     return vehicle_info;
   } catch (error) {
@@ -80,8 +86,8 @@ const getVehicleInfo = async (plate) => {
 };
 
 const normalizeDateFormat = (data) => {
-  const [date, time] = data.split(" ");
-  const [day, month, year] = date.split("/");
+  const [date, time] = data.split(' ');
+  const [day, month, year] = date.split('/');
   const formatted_data = `${year}-${month}-${day} ${time}`;
   return formatted_data;
 };

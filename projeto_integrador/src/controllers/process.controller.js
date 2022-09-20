@@ -5,7 +5,7 @@ export class ProcessController {
     try {
       const {
         ait,
-        infraction_date,
+        process_date,
         description,
         number_process,
         code_ctb,
@@ -18,7 +18,7 @@ export class ProcessController {
       const userId = req.userId;
       const process = await ProcessService.create(
         ait,
-        infraction_date,
+        process_date,
         description,
         number_process,
         code_ctb,
@@ -35,12 +35,12 @@ export class ProcessController {
     }
   };
 
-  static getByAit = async (req, res) => {
+  static getByNumberProcess = async (req, res) => {
     try {
       const userId = req.userId;
       const is_admin = req.is_admin;
-      const ait = req.body.ait;
-      const process = await ProcessService.getByAit(ait, userId, is_admin);
+      const number_process = req.body.number_process;
+      const process = await ProcessService.getByNumberProcess(number_process, userId, is_admin);
       return res.status(200).json(process);
     } catch (err) {
       return res.status(err.status).json({ message: err.message });
@@ -63,7 +63,7 @@ export class ProcessController {
     try {
       const {
         ait,
-        infraction_date,
+        process_date,
         description,
         number_process,
         code_ctb,
@@ -77,7 +77,7 @@ export class ProcessController {
       const process = await ProcessService.update(
         id,
         ait,
-        infraction_date,
+        process_date,
         description,
         number_process,
         code_ctb,
@@ -89,7 +89,7 @@ export class ProcessController {
       );
       return res.status(200).json(process);
     } catch (err) {
-      return res.status(err.status).json({ message: err.message });
+      return res.status(400).json({ message: err.message });
     }
   };
 

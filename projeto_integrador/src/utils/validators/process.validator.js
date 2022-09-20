@@ -8,7 +8,9 @@ export const validationBodyCreateProcess = [
   body('price', 'Must be a number').isFloat(),
 ];
 
-export const validationBodyFindByAitProcess = [body('ait', 'Ait is required').exists({ checkFalsy: true })];
+export const validationBodyGetByNumberProcess = [
+  body('number_process', 'Number Process is required').exists({ checkFalsy: true }),
+];
 
 export const checkCreateProcess = (req, res, next) => {
   const errors = validationResult(req);
@@ -18,7 +20,7 @@ export const checkCreateProcess = (req, res, next) => {
   next();
 };
 
-export const checkGetByAitProcess = (req, res, next) => {
+export const checkGetByNumberProcess = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
