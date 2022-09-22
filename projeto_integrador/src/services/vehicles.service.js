@@ -25,8 +25,10 @@ export default class VehiclesService {
     }
   }
 
+
   static async index(user_id) {
     const allVehicles = await prisma.vehicles.findMany({where: {id_user: user_id}});
+
     return allVehicles;
   }
 
@@ -122,4 +124,6 @@ const findVehicles = async (id) => {
     throw new AppError("vehicles not found.", 404);
   }
   return vehicles;
+
 };
+

@@ -12,7 +12,9 @@ export default class VehiclesController {
         year,
         brand,
       } = req.body;
+
       const vehicle = await VehiclesService.create(
+
         id_user,
         vehicle_state,
         license_plate,
@@ -21,15 +23,19 @@ export default class VehiclesController {
         brand,
         year
       );
+
       return res.status(201).json(vehicle);
+
     } catch (err) {
       return res.status(err.status).json({ message: err.message });
     }
   };
   static index = async (req, res) => {
     try {
+
       const id_user = req.userId;
       const allVehicles = await VehiclesService.index(id_user);
+
       return res.status(200).json(allVehicles);
     } catch (err) {
       return res.status(err.status).json({ message: err.message });
@@ -83,4 +89,5 @@ export default class VehiclesController {
       return res.status(err.status).json({ message: err.message });
     }
   };
+
 }
