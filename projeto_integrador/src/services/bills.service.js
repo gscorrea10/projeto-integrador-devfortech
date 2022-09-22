@@ -11,7 +11,8 @@ export default class BillsService {
       },
     });
     if (!vehicle) {
-      throw new AppError('Vehicle not found.', 404);
+    
+      throw new AppError("Vehicle not found.", 404);
     }
     const vehicle_info = await getVehicleInfo(vehicle.license_plate);
     try {

@@ -97,10 +97,7 @@ class ProcessService {
     finished,
     id_vehicle,
   ) {
-    /*const existentFields = await verifyUniqueFields(ait, code);
-    if (existentFields.length > 0) {
-      throw new AppError(`Process with ${existentFields.join(', ')} already exists`, 400);
-    }*/
+
     const process = await prisma.process.update({
       where: {
         id,

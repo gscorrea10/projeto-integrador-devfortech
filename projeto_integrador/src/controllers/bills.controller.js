@@ -1,5 +1,5 @@
-import { prisma } from '@prisma/client';
-import BillsService from '../services/bills.service';
+import { prisma } from "@prisma/client";
+import BillsService from "../services/bills.service";
 
 export default class BillsController {
   static search_plate = async (req, res) => {
