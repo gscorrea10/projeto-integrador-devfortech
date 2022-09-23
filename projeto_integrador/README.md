@@ -73,18 +73,18 @@ Utiliza uma [API externa](https://infosimples.com/) para fazer consultas sobre d
 
 ## Bibliotecas Utilizadas no Back-End
 
-```
-1. express
-2. jsonwebtoken
-3. bcryptjs
-4. axios
-5. cors
-6. dotenv
-7. prisma
-8. nodemon
-9. sucrase
-10. express-validator
-```
+
+1. [express](https://expressjs.com/pt-br/)
+2. [jsonwebtoken](https://jwt.io/)
+3. [bcryptjs](https://www.npmjs.com/package/bcryptjs)
+4. [axios](https://axios-http.com/ptbr/docs/intro)
+5. [cors](https://www.npmjs.com/package/cors)
+6. [dotenv](https://www.npmjs.com/package/dotenv)
+7. [prisma](https://www.prisma.io/docs/)
+8. [nodemon](https://nodemon.io/)
+9. [sucrase](https://www.npmjs.com/package/sucrase)
+10. [express-validator](https://express-validator.github.io/docs/)
+
 
 ### Diagrama de Casos de Uso
 
