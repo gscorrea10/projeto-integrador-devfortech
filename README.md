@@ -88,11 +88,11 @@ Utiliza uma [API externa](https://infosimples.com/) para fazer consultas sobre d
 
 ### Diagrama de Casos de Uso
 
-<img src="/home/gabriel/Desktop/my projects/gama_projeto/projeto-integrador-devfortech/projeto_integrador/imgs/Untitled_Diagram.drawio_(1).png"></img>
+<img src="./Diagrama.png"></img>
 
 ### DER
 
-<img src="/home/gabriel/Desktop/my projects/gama_projeto/projeto-integrador-devfortech/projeto_integrador/imgs/Untitled.png"> </img>
+<img src="./DER.png"> </img>
 
 # Como executar
 
