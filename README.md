@@ -108,6 +108,12 @@ git clone git@github.com:gscorrea10/projeto-integrador-devfortech.git
 ```
 npm install
 ```
+* Seguir o exemplo do .env.example e criar o .env
+```
+DATABASE_URL="local do banco"
+JWT_SECRET="Chave de criptografia do jwt"
+API_TOKEN="Você precisar criar uma conta no site da API (InfoSimples)"
+```
 * Rodar as migrations do prisma no banco de dados
 ```
 npx prisma migrate dev
