@@ -98,8 +98,12 @@ Utiliza uma [API externa](https://infosimples.com/) para fazer consultas sobre d
 
 * Clone o repositório
 ```
-xxxxx
+git clone git@github.com:gscorrea10/projeto-integrador-devfortech.git
 ```
+* Entre na pasta projeto_integrador
+ ```
+ cd projeto_integrador
+ ```
 * Instalar as dependências do projeto
 ```
 npm install
