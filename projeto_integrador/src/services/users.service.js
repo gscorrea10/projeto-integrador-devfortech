@@ -1,12 +1,13 @@
-import bcrypt from "bcryptjs";
-import { prisma } from "../app.js";
-import AppError from "../errors/AppError.js";
+import bcrypt from 'bcryptjs';
+import { prisma } from '../app.js';
+import AppError from '../errors/AppError.js';
+import { compare } from 'bcryptjs';
 
 export default class UserService {
   static async create(full_name, email, password, cpf, cnh, is_admin) {
     const fields = await verifyExistentUser(email, cpf, cnh);
     if (fields.length > 0) {
-      throw new AppError(`Fields ${fields.join(", ")} already exists.`, 400);
+      throw new AppError(`Fields ${fields.join(', ')} already exists.`, 400);
     }
     const user = await prisma.users.create({
       data: {
@@ -35,7 +36,7 @@ export default class UserService {
       },
     });
     if (!user) {
-      throw new AppError("User not found.", 404);
+      throw new AppError('User not found.', 404);
     }
     delete user.password;
     return user;
@@ -94,7 +95,7 @@ const verifyExistentUser = async (email, cpf, cnh) => {
     },
   });
   if (user) {
-    fields.push("email");
+    fields.push('email');
   }
   user = await prisma.users.findFirst({
     where: {
@@ -102,7 +103,7 @@ const verifyExistentUser = async (email, cpf, cnh) => {
     },
   });
   if (user) {
-    fields.push("cpf");
+    fields.push('cpf');
   }
   user = await prisma.users.findFirst({
     where: {
@@ -110,7 +111,7 @@ const verifyExistentUser = async (email, cpf, cnh) => {
     },
   });
   if (user) {
-    fields.push("cnh");
+    fields.push('cnh');
   }
   return fields;
 };
@@ -122,7 +123,7 @@ const findUser = async (id) => {
     },
   });
   if (!user) {
-    throw new AppError("User not found.", 404);
+    throw new AppError('User not found.', 404);
   }
   return user;
 };
