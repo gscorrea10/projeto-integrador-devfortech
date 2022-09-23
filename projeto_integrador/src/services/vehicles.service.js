@@ -3,11 +3,11 @@ import AppError from "../errors/AppError.js";
 
 export default class VehiclesService {
   static async create(id_user, vehicle_state, license_plate, renavam, model, brand, year ) {
+    const fields = await verifyExistentVehicle(renavam, license_plate);
+    if (fields.length > 0) {
+      throw new AppError(`Fields ${fields.join(", ")} already exists.`, 400);
+    }
     try {
-      const fields = await verifyExistentVehicle(renavam, license_plate);
-      if (fields.length > 0) {
-        throw new AppError(`Fields ${fields.join(", ")} already exists.`, 400);
-      }
       const vehicles = await prisma.vehicles.create({
         data: {
           id_user,
@@ -25,8 +25,10 @@ export default class VehiclesService {
     }
   }
 
-  static async index() {
-    const allVehicles = await prisma.vehicles.findMany();
+
+  static async index(user_id) {
+    const allVehicles = await prisma.vehicles.findMany({where: {id_user: user_id}});
+
     return allVehicles;
   }
 
@@ -122,4 +124,6 @@ const findVehicles = async (id) => {
     throw new AppError("vehicles not found.", 404);
   }
   return vehicles;
+
 };
+
