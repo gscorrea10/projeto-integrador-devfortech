@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import VehiclesController from '../controllers/vehicles.controller.js';
-import { validationBodyCreateVehicle, checkCreateVehicle } from '../utils/validators/vehicle.validator.js';
+import { validationBodyCreateVehicle, checkCreateVehicle } from '../middlewares/validators/vehicle.validator';
 
 import AuthTokenMiddleware from '../middlewares/authToken.middleware.js';
 

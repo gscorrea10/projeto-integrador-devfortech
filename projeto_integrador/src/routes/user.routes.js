@@ -5,7 +5,7 @@ import {
   checkCreateUser,
   validationBodyUpdateUser,
   checkUpdateUser,
-} from '../utils/validators/user.validator.js';
+} from '../middlewares/validators/user.validator';
 
 export const userRouter = Router();
 

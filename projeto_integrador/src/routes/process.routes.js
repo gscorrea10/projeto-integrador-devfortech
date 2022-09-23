@@ -9,7 +9,7 @@ import {
   validationBodyUpdateProcess,
   validationGellAllProcess,
   checkGetAllProcess,
-} from '../utils/validators/process.validator.js';
+} from '../middlewares/validators/process.validator';
 import IsAdmin from '../middlewares/isAdmin.middleware.js';
 import AuthTokenMiddleware from '../middlewares/authToken.middleware.js';
 
