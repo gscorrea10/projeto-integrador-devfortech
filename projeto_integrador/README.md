@@ -1,4 +1,6 @@
-# Projeto Integrador - Gama Academy
+# Projeto Integrador - Gama Academy 
+
+## Projeto desenvolvido durante o bootcamp Dev For Tech da GamaAcademy em parceria com a ACATE.  
 
 **Nome do time:** *Time 04*
 
@@ -71,6 +73,7 @@ Utiliza uma [API externa](https://infosimples.com/) para fazer consultas sobre d
 
 ## Bibliotecas Utilizadas no Back-End
 
+```
 1. express
 2. jsonwebtoken
 3. bcryptjs
@@ -81,6 +84,7 @@ Utiliza uma [API externa](https://infosimples.com/) para fazer consultas sobre d
 8. nodemon
 9. sucrase
 10. express-validator
+```
 
 ### Diagrama de Casos de Uso
 
