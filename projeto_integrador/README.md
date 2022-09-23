@@ -80,6 +80,7 @@ Utiliza uma [API externa](https://infosimples.com/) para fazer consultas sobre d
 7. prisma
 8. nodemon
 9. sucrase
+10. express-validator
 
 ### Diagrama de Casos de Uso
 
