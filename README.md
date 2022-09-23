@@ -88,7 +88,7 @@ Utiliza uma [API externa](https://infosimples.com/) para fazer consultas sobre d
 
 ### Diagrama de Casos de Uso
 
-<img src="./Diagrama.png"></img>
+<img src="./Diagrama.jpg"></img>
 
 ### DER
 
