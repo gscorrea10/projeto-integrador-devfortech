@@ -112,3 +112,7 @@ npx prisma migrate dev
 ```
 npm run dev
 ```
+* Para abrir o Prisma Studio (db visual editor)
+```
+npx prisma studio
+```
