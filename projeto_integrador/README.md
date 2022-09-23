@@ -93,3 +93,22 @@ Utiliza uma [API externa](https://infosimples.com/) para fazer consultas sobre d
 ### DER
 
 <img src="/home/gabriel/Desktop/my projects/gama_projeto/projeto-integrador-devfortech/projeto_integrador/imgs/Untitled.png"> </img>
+
+# Como executar
+
+* Clone o repositório
+```
+xxxxx
+```
+* Instalar as dependências do projeto
+```
+npm install
+```
+* Rodar as migrations do prisma no banco de dados
+```
+npx prisma migrate dev
+```
+* Inicie o servidor
+```
+npm run dev
+```
