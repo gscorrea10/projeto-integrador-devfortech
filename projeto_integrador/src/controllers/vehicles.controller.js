@@ -1,38 +1,19 @@
-import VehiclesService from "../services/vehicles.service.js";
+import VehiclesService from '../services/vehicles.service.js';
 
 export default class VehiclesController {
   static create = async (req, res) => {
     try {
-      const {
-        vehicle_state,
-        id_user,
-        renavam,
-        model,
-        license_plate,
-        year,
-        brand,
-      } = req.body;
+      const { vehicle_state, id_user, renavam, model, license_plate, year, brand } = req.body;
 
-      const vehicle = await VehiclesService.create(
-
-        id_user,
-        vehicle_state,
-        license_plate,
-        renavam,
-        model,
-        brand,
-        year
-      );
+      const vehicle = await VehiclesService.create(id_user, vehicle_state, license_plate, renavam, model, brand, year);
 
       return res.status(201).json(vehicle);
-
     } catch (err) {
       return res.status(err.status).json({ message: err.message });
     }
   };
   static index = async (req, res) => {
     try {
-
       const id_user = req.userId;
       const allVehicles = await VehiclesService.index(id_user);
 
@@ -54,15 +35,7 @@ export default class VehiclesController {
 
   static update = async (req, res) => {
     try {
-      const {
-        vehicle_state,
-        id_user,
-        renavam,
-        model,
-        license_plate,
-        year,
-        brand,
-      } = req.body;
+      const { vehicle_state, id_user, renavam, model, license_plate, year, brand } = req.body;
       const { id } = req.params;
       const vehicles = await VehiclesService.update(
         id,
@@ -72,7 +45,7 @@ export default class VehiclesController {
         renavam,
         model,
         brand,
-        year
+        year,
       );
       return res.status(200).json(vehicles);
     } catch (err) {
@@ -86,8 +59,7 @@ export default class VehiclesController {
       await VehiclesService.delete(id);
       return res.status(204).json({});
     } catch (err) {
-      return res.status(err.status).json({ message: err.message });
+      return res.status(400).json({ message: err.message });
     }
   };
-
 }
